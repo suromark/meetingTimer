@@ -52,6 +52,8 @@ as seen from Wemos D1:
 
 The matrix modules get wired in series. The VCC and GND lines effectively run parallel through all modules, while each module's last DOUT / CS / CLK pin gets connected to the next module's first DIN / CS / CLK pin.
 
+*Depending on the LED board you got, it may or may not require a level shifter / signal boost to the CLK/DI/CS lines to work. A 74HCT125 IC should do the trick.*
+
 I recommend feeding the 5V power around the center of the matrix module chain to minimize line length losses, and to not run the modules at full brightness if you haven't done the hardware hack below:
 
 **NOTE: Be aware that full brightness of a single low-budget 4 x 8 x 8 red LED board configured with 10kΩ can exceed 1 A consumption (most of which will be converted to useless heat since it's overdriving the LEDs) so a test run of all 3 will overwhelm the usual 5V / 2A chargers. They *should* shut down but ... no guarantee**
