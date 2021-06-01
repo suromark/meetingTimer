@@ -29,7 +29,7 @@ It's also most likely a hodgepodge of coding sins, but hey ... everyone has to s
 ## Bill of materials
 
 - 1x Wemos D1 mini ESP-8266 microcontroller
-- 1x MAX7219 8x8 LED Matrix strip module (4 in a row pre-connected on a PCB)
+- 1x MAX7219 4x 8x8 / 32x8 LED Matrix strip module (4 in a row pre-connected on a PCB)
 - Push Button (Normally Open type)
 - Alternative: a touch panel module, and a NPN transistor on its output to act as pulldown on D3
 - Resistors 560 Ω (optional, to protect the ESP I/O pins against accidental reverse flow)
@@ -50,13 +50,13 @@ as seen from Wemos D1:
 - GND -> Matrix GND, RTC GND
 - 5V -> Matrix VCC, RTC VCC
 
-The matrix modules get wired in series. The VCC and GND lines effectively run parallel through all modules, while each module's last DOUT / CS / CLK pin gets connected to the next module's first DIN / CS / CLK pin.
+If you use separate 8x8 modules, they get wired in series. The VCC and GND lines effectively run parallel through all modules, while each module's last DOUT / CS / CLK pin gets connected to the next module's first DIN / CS / CLK pin.
 
 *Depending on the LED board you got, it may or may not require a level shifter / signal boost to the CLK/DI/CS lines to work. A 74HCT125 IC should do the trick.*
 
 I recommend feeding the 5V power around the center of the matrix module chain to minimize line length losses, and to not run the modules at full brightness if you haven't done the hardware hack below:
 
-**NOTE: Be aware that full brightness of a single low-budget 4 x 8 x 8 red LED board configured with 10kΩ can exceed 1 A consumption (most of which will be converted to useless heat since it's overdriving the LEDs) so a test run of all 3 will overwhelm the usual 5V / 2A chargers. They *should* shut down but ... no guarantee**
+**NOTE: Be aware that full brightness of a single low-budget 4 x 8 x 8 red LED board configured with 10kΩ can exceed 1 A consumption (most of which will be converted to useless heat since it's overdriving the LEDs)**
 
 I do recommend (if you have the patience, equipment and soldering skill for fiddling with SMD components) to replace the default 10kΩ current setting resistors of the MAX7219 modules with 40-68 kΩ ones that will significantly lower both heat and power demand of the LED display ...
 
